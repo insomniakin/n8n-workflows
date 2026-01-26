@@ -62,18 +62,27 @@
 - [x] Create file structure guide
 - [x] Make all scripts executable
 
+## 9. Open WebUI + Ollama Integration (NEW!)
+- [x] Create Open WebUI installation script
+- [x] Configure Ollama service for network access
+- [x] Document model list auto-population fix
+- [x] Create troubleshooting guide for empty model dropdown
+- [x] Add environment variable reference
+- [x] Document N8N integration with Ollama API
+
 ## 📦 Deliverables Summary
 
-### Installation Scripts (7 files)
+### Installation Scripts (8 files)
 1. ✅ install_all.sh - Complete automated installation
 2. ✅ install_prerequisites.sh - System prerequisites
 3. ✅ install_n8n.sh - N8N workflow automation
 4. ✅ install_comfyui.sh - ComfyUI for AI generation
 5. ✅ download_models.sh - AI models download
 6. ✅ install_audiocraft.sh - AudioCraft for music
-7. ✅ install_hybrid_video.sh - **NEW** Hybrid video system (Kling, Veo, Sora, Seedance, WAN 2.1)
+7. ✅ install_hybrid_video.sh - Hybrid video system (Kling, Veo, Sora, Seedance, WAN 2.1)
+8. ✅ **install_openwebui.sh** - **NEW** Open WebUI + Ollama setup
 
-### Documentation (8 files)
+### Documentation (9 files)
 1. ✅ README.md - Main documentation and quick start
 2. ✅ AI_AUTOMATION_SETUP_GUIDE.md - Complete setup guide
 3. ✅ example_workflows.md - N8N workflow examples
@@ -81,15 +90,17 @@
 5. ✅ SYSTEM_ARCHITECTURE.md - Architecture diagrams
 6. ✅ FILE_STRUCTURE.md - File organization guide
 7. ✅ START_HERE.md - Quick start guide
-8. ✅ HYBRID_AI_VIDEO_SYSTEM.md - **NEW** Hybrid video system documentation
+8. ✅ HYBRID_AI_VIDEO_SYSTEM.md - Hybrid video system documentation
+9. ✅ **OPENWEBUI_SETUP.md** - **NEW** Open WebUI setup & troubleshooting
 
 ## 🎯 What You Can Do Now
 
 1. **Start Installation**: Run `./install_all.sh`
 2. **Add Hybrid Video**: Run `./install_hybrid_video.sh`
-3. **Read Documentation**: Start with README.md
-4. **Learn Workflows**: Check example_workflows.md
-5. **Get Help**: Use QUICK_REFERENCE.md
+3. **Add Open WebUI**: Run `./install_openwebui.sh` ⭐ NEW
+4. **Read Documentation**: Start with README.md
+5. **Learn Workflows**: Check example_workflows.md
+6. **Get Help**: Use QUICK_REFERENCE.md
 
 ## 🚀 System Capabilities
 
@@ -101,6 +112,7 @@
 ✅ Automate entire content pipelines (N8N)
 ✅ Run everything locally (no cloud costs)
 ✅ Unlimited content generation
+✅ **Chat with local LLMs (Open WebUI + Ollama)** ⭐ NEW
 
 ### API-Based (Premium Quality)
 ✅ Kling 2.5 Turbo Pro - Best quality/price ratio
@@ -111,12 +123,42 @@
 
 ## 📊 Project Statistics
 
-- Total Scripts: 6
-- Total Documentation: 6 files
-- Lines of Code: ~1,500+
-- Documentation Pages: ~150+
+- Total Scripts: 8
+- Total Documentation: 9 files
+- Lines of Code: ~2,000+
+- Documentation Pages: ~200+
 - Installation Time: 1-2 hours
-- Disk Space Required: ~50 GB
+- Disk Space Required: ~60 GB
+
+## 🔧 Open WebUI Quick Fix (Model List Not Showing)
+
+If models don't appear in the dropdown:
+
+```bash
+# 1. Ensure Ollama is running
+sudo systemctl restart ollama
+
+# 2. Verify models exist
+ollama list
+
+# 3. If no models, pull one
+ollama pull llama3.2
+
+# 4. Restart Open WebUI
+cd ~/ai-automation/openwebui
+docker compose restart
+
+# 5. Check Ollama API
+curl http://localhost:11434/api/tags
+```
+
+Key environment variables for docker-compose.yml:
+```yaml
+environment:
+  - OLLAMA_BASE_URL=http://host.docker.internal:11434
+  - ENABLE_OLLAMA_API=true
+  - AUTOMATIC_MODEL_REFRESH=true
+```
 
 ## 🎉 Ready to Deploy!
 
